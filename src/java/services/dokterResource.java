@@ -5,33 +5,33 @@
  */
 package services;
 
-import com.google.common.net.MediaType;
 import com.google.gson.Gson;
-import helper.pasienHelper;
-import javafx.scene.media.Media;
+import helper.dokterHelper;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import pojos.Pasien;
 
 /**
  *
  * @author Yoseph
  */
-@Path("pasien")
-public class pasienResource {
-     @Context
+@Path("dokter")
+public class dokterResource {
+ 
+
+    @Context
     private UriInfo context;
 
     /**
      * Creates a new instance of lokasiResource
      */
-    public pasienResource() {
+    public dokterResource() {
     }
 
     /**
@@ -43,10 +43,10 @@ public class pasienResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getJson() {
         //TODO return proper representation object
-        pasienHelper p = new pasienHelper();
+        dokterHelper d = new dokterHelper();
         Gson gson = new Gson();
         return Response.status(Response.Status.OK)
-                .entity(gson.toJson(p.bacaSemuaPasien()))
+                .entity(gson.toJson(d.bacaSemuaLokasi()))
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methods",
                         "GET,POST,HEAD,OPTIONS,PUT")
@@ -65,33 +65,11 @@ public class pasienResource {
      * PUT method for updating or creating an instance of lokasiResource
      *
      * @param content representation for the resource
-//     */
-//    @PUT
-//    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-//    public void putJson(String content) {
- //   }
-    
-@POST
-@Path("addPasien")
- @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-public Response AddNewPasien(String data){
-    Gson gson=new Gson();
-    Pasien pasien= gson.fromJson(data,Pasien.class);
-    pasienHelper helper =new pasienHelper();
-    helper.addNewPasien(
-        pasien.getNik(),
-            pasien.getNama(),
-            pasien.getAlamat(),
-            pasien.getNik(),
-            pasien.getTanggalLahir(),
-            pasien.getKelamin()
-            );
-    return Response.status(200).entity(pasien).build();
+     */
+    @PUT
+    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public void putJson(String content) {
+    }
 }
 
-    
-
- 
-    
-}
 
